@@ -36,7 +36,7 @@ export default function CoffeeShopManager() {
         if (savedCustomerCount !== null) {
             setCustomerCount(parseInt(savedCustomerCount, 10));
             console.log('✅ Loaded customer count:', savedCustomerCount);
-        }
+        };
 
         // ========================================
         // 🎯 EXERCISE useEffect 2: Load saved order from localStorage on Mount
@@ -44,6 +44,11 @@ export default function CoffeeShopManager() {
         // Hint: Load orders with localStorage.getItem('coffeeShop_orders')
         // Hint: Check if the values exist before setting state (if (savedValue) { ... })
         // Hint: Remember to parse the JSON string for orders before use setOrders: JSON.parse(savedOrders)
+        const savedOrders = localStorage.getItem('coffeeShop_orders');
+        if (savedOrders !== null) {
+            setOrders(JSON.parse(savedOrders));
+            console.log('✅ Loaded orders:', savedOrders);
+        };
 
     }, []);
 
@@ -63,6 +68,10 @@ export default function CoffeeShopManager() {
     // Hint: Use localStorage.setItem('coffeeShop_orders', JSON.stringify(orders))
     // Hint: The dependency array should include [orders]
     // Hint: Don't forget to add a console.log to see when it runs!
+    useEffect(() => {
+        localStorage.setItem('coffeeShop_orders', JSON.stringify(orders));
+        console.log('Saved orders:', orders);
+    }, [orders]);
 
     return (
         <div className="min-h-screen bg-[#D2B48C] py-8 px-4">
